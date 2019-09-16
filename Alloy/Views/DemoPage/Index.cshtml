@@ -1,0 +1,37 @@
+﻿@model Alloy.Models.ViewModels.DemoPageViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*Steg
+        1. Skapa statisk html-mockup utan att programmera 
+        2. Lägg in loop
+        3. Gör texter och länkar dynamiska*@
+    <nav>
+        <ul>
+            @foreach (var item in Model.MainMenuList)
+            {
+            <li>
+                @*<a href="#" class="selected">Sida</a>  - Static Mockup*@
+                @*@Html.ContentLink(item) - Först försöket, gör a-tag men kan inte anpassas*@
+                <a href="@Url.ContentUrl(item.ContentLink)" >@item.Name</a>
+            </li>
+            }
+        </ul>
+    </nav>
+    <div> 
+        <h1 @Html.EditAttributes(m => m.CurrentPage.Name)>@Model.CurrentPage.Name</h1>
+
+        @*Här kommer brödtexten*@
+        @Html.PropertyFor(m => m.CurrentPage.MainBody)
+    </div>
+</body>
+</html>

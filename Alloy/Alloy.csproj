@@ -318,6 +318,7 @@
     <Compile Include="Business\UIDescriptors\ContainerPageUIDescriptor.cs" />
     <Compile Include="Controllers\ContactBlockController.cs" />
     <Compile Include="Controllers\DefaultPageController.cs" />
+    <Compile Include="Controllers\DemoPageController.cs" />
     <Compile Include="Controllers\FindSearchPageController.cs" />
     <Compile Include="Controllers\GDPRApiDemoPageController.cs" />
     <Compile Include="Controllers\ImageFileController.cs" />
@@ -348,6 +349,7 @@
     <Compile Include="Models\Pages\ArticlePage.cs" />
     <Compile Include="Models\Pages\ContactPage.cs" />
     <Compile Include="Models\Pages\ContainerPage.cs" />
+    <Compile Include="Models\Pages\DemoPage.cs" />
     <Compile Include="Models\Pages\FindSearchPage.cs" />
     <Compile Include="Models\Pages\GDPRApiDemoPage.cs" />
     <Compile Include="Models\Pages\IHasRelatedContent.cs" />
@@ -364,6 +366,7 @@
     <Compile Include="Models\SiteImageUrl.cs" />
     <Compile Include="Models\ViewModels\ContactBlockModel.cs" />
     <Compile Include="Models\ViewModels\ContentRenderingErrorModel.cs" />
+    <Compile Include="Models\ViewModels\DemoPageViewModel.cs" />
     <Compile Include="Models\ViewModels\FindSearchContentModel.cs" />
     <Compile Include="Models\ViewModels\GDPRDemoModel.cs" />
     <Compile Include="Models\ViewModels\ImageViewModel.cs" />
@@ -500,6 +503,7 @@
     <Content Include="Views\ImageFile\Index.cshtml" />
     <Content Include="Views\ContactBlock\Index.cshtml" />
     <Content Include="Views\ArticlePage\Index.cshtml" />
+    <Content Include="Views\DemoPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
