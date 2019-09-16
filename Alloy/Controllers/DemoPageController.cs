@@ -37,10 +37,25 @@ namespace Alloy.Controllers
             //Tvätta bort sidor som inte ska synas i navigeringen.
             IEnumerable<PageData> listWithPagesVisibleInNavigation = filteredListOfPages.Where(p => p.VisibleInMenu == true);
 
+            // Ladda in alla föräldrar
+            var allAncestors = loader.GetAncestors(currentPageId);
+
+            // Bygg en lista med MenuItem som view model för menyn.
+            var list = new List<MenuItem>();
+            foreach (var page in listWithPagesVisibleInNavigation)
+            {
+                var item = new MenuItem();
+                item.Page = page;
+                item.Active = allAncestors.Contains(page);
+
+                list.Add(item);
+            }
+
 
             var model = new DemoPageViewModel();
             model.CurrentPage = currentPage;
             model.MainMenuList = listWithPagesVisibleInNavigation;
+            model.MainMenuListWithItems = list;
 
 
             return View(model);

@@ -12,5 +12,6 @@ namespace Alloy.Models.Pages
     public class DemoPage : PageData
     {
         public virtual XhtmlString MainBody { get; set; }
+
     }
 }
