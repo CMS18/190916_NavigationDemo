@@ -21,6 +21,8 @@ namespace Alloy.Models.ViewModels
 
         public IEnumerable<MenuItem> MainMenuListWithItems { get; internal set; }
 
+        public IEnumerable<PageData> MyListOfPages { get; set; }
+
     }
 
 }

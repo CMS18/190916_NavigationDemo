@@ -52,10 +52,18 @@ namespace Alloy.Controllers
             }
 
 
+            IEnumerable<PageData> myListOfPages = new List<PageData>();
+            // Hämta sidor under sidan som egenskapen IdOfParentPageToList pekar ut
+            if (!ContentReference.IsNullOrEmpty(currentPage.IdOfParentPageToList))
+            {
+                myListOfPages = loader.GetChildren<PageData>(currentPage.IdOfParentPageToList);
+            }
+
             var model = new DemoPageViewModel();
             model.CurrentPage = currentPage;
             model.MainMenuList = listWithPagesVisibleInNavigation;
             model.MainMenuListWithItems = list;
+            model.MyListOfPages = myListOfPages;
 
 
             return View(model);

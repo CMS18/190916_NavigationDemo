@@ -13,5 +13,6 @@ namespace Alloy.Models.Pages
     {
         public virtual XhtmlString MainBody { get; set; }
 
+        public virtual ContentReference IdOfParentPageToList { get; set; }
     }
 }

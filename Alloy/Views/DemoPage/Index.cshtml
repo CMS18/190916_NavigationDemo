@@ -49,5 +49,33 @@
         @*Här kommer brödtexten*@
         @Html.PropertyFor(m => m.CurrentPage.MainBody)
     </div>
+
+    <div>
+        <h2>Lista med nyheter</h2>
+
+        @foreach (var page in Model.MyListOfPages)
+        {
+    <div class="listResult theme2">
+        <h3>
+            @Html.ContentLink(page)
+        </h3>
+        <p class="date">
+            @page.StartPublish.Value.ToString("yyyy-MM-dd")
+            @*Använd DisplayTemplate for DateTime:*@
+            @Html.DisplayFor(x => page.StartPublish.Value)
+        </p>
+        @if (!string.IsNullOrWhiteSpace(page["TeaserText"] as string))
+        {
+            <p>@page["TeaserText"]</p>
+        }
+
+        <hr>
+    </div>
+        }
+
+
+
+
+    </div>
 </body>
 </html>
