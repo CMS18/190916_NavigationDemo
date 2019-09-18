@@ -23,6 +23,10 @@ namespace Alloy.Models.ViewModels
 
         public IEnumerable<PageData> MyListOfPages { get; set; }
 
+        public PageData RootPageOfMyListOfPages { get; set; }
+
+        public PageDataCollection SearchResult { get; set; }
+
     }
 
 }

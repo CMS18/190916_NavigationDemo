@@ -15,10 +15,12 @@ namespace Alloy.Controllers
     public class DemoPageController : PageController<DemoPage>
     {
         private readonly IContentLoader loader;
+        private readonly IPageCriteriaQueryService query;
 
-        public DemoPageController(IContentLoader loader) // Constructor Injection
+        public DemoPageController(IContentLoader loader, IPageCriteriaQueryService query) // Constructor Injection
         {
             this.loader = loader;
+            this.query = query;
         }
 
         public ActionResult Index(DemoPage currentPage)
@@ -51,7 +53,7 @@ namespace Alloy.Controllers
                 list.Add(item);
             }
 
-
+            // Laddar nyheter med GetChildren
             IEnumerable<PageData> myListOfPages = new List<PageData>();
             // Hämta sidor under sidan som egenskapen IdOfParentPageToList pekar ut
             if (!ContentReference.IsNullOrEmpty(currentPage.IdOfParentPageToList))
@@ -59,12 +61,27 @@ namespace Alloy.Controllers
                 myListOfPages = loader.GetChildren<PageData>(currentPage.IdOfParentPageToList);
             }
 
+            // Ladda nyheter med databas sök
+            PageReference startPageForSearch = new PageReference(startPageId);
+            var criterias = new PropertyCriteriaCollection
+            {
+                new PropertyCriteria
+                {
+                    Type = PropertyDataType.String,
+                    Name = "PageName",
+                    Condition = CompareCondition.Contained,
+                    Value = "alloy"
+                }
+            };
+            var result = query.FindPagesWithCriteria(startPageForSearch, criterias);
+
             var model = new DemoPageViewModel();
             model.CurrentPage = currentPage;
             model.MainMenuList = listWithPagesVisibleInNavigation;
             model.MainMenuListWithItems = list;
             model.MyListOfPages = myListOfPages;
-
+            model.RootPageOfMyListOfPages = loader.Get<PageData>(currentPage.IdOfParentPageToList);
+            model.SearchResult = result;
 
             return View(model);
         }

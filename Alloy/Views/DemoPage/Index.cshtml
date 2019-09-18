@@ -1,4 +1,5 @@
 ﻿@model Alloy.Models.ViewModels.DemoPageViewModel
+
 @{
     Layout = null;
 }
@@ -50,31 +51,38 @@
         @Html.PropertyFor(m => m.CurrentPage.MainBody)
     </div>
 
-    <div>
-        <h2>Lista med nyheter</h2>
+    <div @Html.EditAttributes(m => m.CurrentPage.IdOfParentPageToList)>
+        <h2>@Model.RootPageOfMyListOfPages.Name</h2>
+
+        <h2>@(Model.CurrentPage.IdOfParentPageToList.Get<PageData>().Name)</h2>
 
         @foreach (var page in Model.MyListOfPages)
         {
-    <div class="listResult theme2">
-        <h3>
-            @Html.ContentLink(page)
-        </h3>
-        <p class="date">
-            @page.StartPublish.Value.ToString("yyyy-MM-dd")
-            @*Använd DisplayTemplate for DateTime:*@
-            @Html.DisplayFor(x => page.StartPublish.Value)
-        </p>
-        @if (!string.IsNullOrWhiteSpace(page["TeaserText"] as string))
-        {
-            <p>@page["TeaserText"]</p>
+            <div class="listResult theme2">
+                <h3>
+                    @Html.ContentLink(page)
+                </h3>
+                <p class="date">
+                    @page.StartPublish.Value.ToString("yyyy-MM-dd")
+                    @*Använd DisplayTemplate for DateTime:*@
+                    @Html.DisplayFor(x => page.StartPublish.Value)
+                </p>
+                @if (!string.IsNullOrWhiteSpace(page["TeaserText"] as string))
+                {
+                    <p>@page["TeaserText"]</p>
+                }
+
+                <hr>
+            </div>
         }
 
-        <hr>
-    </div>
-        }
-
-
-
+        <h2>Search Result</h2>
+        <ul>
+            @foreach (var page in Model.SearchResult)
+            {
+                <li>@Html.ContentLink(page)</li>
+            }
+        </ul>
 
     </div>
 </body>

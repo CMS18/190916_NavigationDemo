@@ -11,3 +11,13 @@
     </div>
 </div>
 @Html.PropertyFor(x => x.CurrentPage.MainContentArea, new { CssClass = "row", Tag = Global.ContentAreaTags.TwoThirdsWidth })
+
+<hr/>
+
+<dl>
+    @foreach (var item in Model.CurrentPage.Property)
+    {
+        <dt>@item.Name @(item.IsMetaData ? "Built-in" : "User defined")</dt>
+        <dd>@item.Value</dd>
+    }
+</dl>
